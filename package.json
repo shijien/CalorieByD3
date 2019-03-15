@@ -1,0 +1,49 @@
+{
+  "name": "CalorieByD3",
+  "version": "1.0.0",
+  "description": "`CalorigyByD3` is the data visualization project using the powerful D3.js. The goal is  can help people see and check the calories from daily food so that can easily improve their health level with the fast pace of life.",
+  "private": true,
+  "engines": {
+    "node": ">=8.1.0"
+  },
+  "scripts": {
+    "start": "node app.js",
+    "start:debug": "DEBUG=* node app.js",
+    "build": "webpack --config webpack.config.js --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shijien/CalorieByD3.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shijien/CalorieByD3/issues"
+  },
+  "homepage": "https://github.com/shijien/CalorieByD3#readme",
+  "devDependencies": {
+    "@babel/core": "^7.3.4",
+    "@babel/preset-env": "^7.3.4",
+    "babel-loader": "^8.0.5",
+    "bable-loader": "0.0.1-security",
+    "css-loader": "^2.1.1",
+    "csv-loader": "^3.0.2",
+    "file-loader": "^3.0.1",
+    "nodemon": "^1.18.10",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.2.3",
+    "xml-loader": "^1.2.1"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "d3": "^5.9.2",
+    "express": "^4.16.4",
+    "lodash": "^4.17.11",
+    "node-fetch": "^2.3.0",
+    "node-sass": "^4.11.0",
+    "sass-loader": "^7.1.0"
+  }
+}
