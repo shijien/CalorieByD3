@@ -1,7 +1,8 @@
 const d3 = require("d3");
 
 
-function d3Bubbles() {
+function d3Bubbles(rawData) {
+    // debugger
     function bubbleChart() {
         const width = 1000;
         const height = 1000;
@@ -48,7 +49,7 @@ function d3Bubbles() {
         // function returns the new node array, with a node for each element in the rawData input
 
         function createNodes(rawData) {
-            debugger
+            // debugger
             // use max size in the data as the max in the scale's domain
             // note we have to ensure that size is a number
             let totalCalories = 0;
@@ -63,9 +64,15 @@ function d3Bubbles() {
             const radiusScale = d3.scaleSqrt()
                 .domain([0, maxSize])
                 .range([0, 80]);
+
+            let foods = rawData.map(d => {
+                // debugger
+                d.level = getRawDataLevel(d.calories);
+                return d;
+            });
         
             // use map() to convert raw data into node data
-            const myNodes = rawData.map(d => ({
+            const myNodes = foods.map(d => ({
                 ...d,
                 radius: radiusScale(+d.calories),
                 size: +d.calories,
@@ -92,7 +99,7 @@ function d3Bubbles() {
         // main entry point to bubble chart, returned by parent closure
         // prepares rawData for visualisation and adds an svg element to the provided selector and starts the visualisation process
         let chart = function chart(selector, rawData) {
-            debugger
+            // debugger
             // convert raw data into nodes data
             nodes = createNodes(rawData);
 
@@ -158,6 +165,19 @@ function d3Bubbles() {
             }
         }
 
+        function getRawDataLevel(calories) {
+            // debugger
+            if (calories <= 50) {
+                return 50;
+            } else if (calories <= 200) {
+                return 200;
+            } else if (calories <= 500) {
+                return 500;
+            } else {
+                return 1000;
+            }
+        }
+
         // return chart function from closure
         return chart;
     }
@@ -172,7 +192,7 @@ function d3Bubbles() {
     }
 
     // load data
-    d3.csv('data/nodes-data.csv').then(display);
+    display(rawData);
 }
 
 module.exports = d3Bubbles;
