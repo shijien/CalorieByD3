@@ -1,7 +1,7 @@
 const d3 = require("d3");
 
 
-function d3Component() {
+function d3Bubbles() {
     function bubbleChart() {
         const width = 1000;
         const height = 1000;
@@ -35,33 +35,56 @@ function d3Component() {
         simulation.stop();
 
         // set up colour scale
+        const fillColourForTotal = d3.scaleOrdinal()
+            .domain(["1500", "2500", "3000"])
+            .range(["#00CC00", "#B266FF", "#FF0000"]);
         const fillColour = d3.scaleOrdinal()
-            .domain(["100", "500", "1000", "1500", "2000"])
-            .range(["#00CC00", "#B2FF66", "#66B2FF", "#B266FF", "#FF0000"]);
+            .domain(["50", "200", "500", "1000"])
+            .range(["#00CC00", "#B2FF66", "#66B2FF", "#B266FF"]);
 
         // data manipulation function takes raw data from csv and converts it into an array of node objects
         // each node will store data and visualisation values to draw a bubble
         // rawData is expected to be an array of data objects, read in d3.csv
         // function returns the new node array, with a node for each element in the rawData input
-        
+
         function createNodes(rawData) {
+            debugger
             // use max size in the data as the max in the scale's domain
             // note we have to ensure that size is a number
-            const maxSize = d3.max(rawData, d => +d.size);
+            let totalCalories = 0;
+
+            for (let i = 0; i < rawData.length; i ++) {
+                totalCalories += parseInt(rawData[i].calories);
+            }
+
+            const maxSize = d3.max(rawData, d => +d.calories);
 
             // size bubbles based on area
             const radiusScale = d3.scaleSqrt()
                 .domain([0, maxSize])
-                .range([0, 80])
-
+                .range([0, 80]);
+        
             // use map() to convert raw data into node data
             const myNodes = rawData.map(d => ({
                 ...d,
-                radius: radiusScale(+d.size),
-                size: +d.size,
+                radius: radiusScale(+d.calories),
+                size: +d.calories,
                 x: Math.random() * 1000,
                 y: Math.random() * 1000
             }))
+            const centerData = {
+                name: "TOTAL CALORIE",
+                totalLevel: getCenterLevel(totalCalories),
+                calories: totalCalories
+            };
+
+            myNodes.push({
+                ...centerData,
+                radius: radiusScale(+centerData.calories),
+                size: +centerData.calories,
+                x: 500,
+                y: 500
+            });
 
             return myNodes;
         }
@@ -69,6 +92,7 @@ function d3Component() {
         // main entry point to bubble chart, returned by parent closure
         // prepares rawData for visualisation and adds an svg element to the provided selector and starts the visualisation process
         let chart = function chart(selector, rawData) {
+            debugger
             // convert raw data into nodes data
             nodes = createNodes(rawData);
 
@@ -80,7 +104,7 @@ function d3Component() {
 
             // bind nodes data to circle elements
             const elements = svg.selectAll('.bubble')
-                .data(nodes, d => d.id)
+                .data(nodes, d => d.name)
                 .enter()
                 .append('g')
 
@@ -88,7 +112,13 @@ function d3Component() {
                 .append('circle')
                 .classed('bubble', true)
                 .attr('r', d => d.radius)
-                .attr('fill', d => fillColour(d.groupid))
+                .attr('fill', d => {
+                    if (d.level !== undefined) {
+                        return fillColour(d.level);
+                    } else {
+                        return fillColourForTotal(d.totalLevel);
+                    }
+                })
 
             // labels
             labels = elements
@@ -96,7 +126,7 @@ function d3Component() {
                 .attr('dy', '.3em')
                 .style('text-anchor', 'middle')
                 .style('font-size', 10)
-                .text(d => d.id)
+                .text(d => d.name)
 
             // set simulation's nodes to our newly created nodes array
             // simulation starts running automatically once nodes are set
@@ -118,6 +148,16 @@ function d3Component() {
                 .attr('y', d => d.y)
         }
 
+        function getCenterLevel(calories) {
+            if (calories <= 1500) {
+                return 1500;
+            } else if (calories <= 2500) {
+                return 2500;
+            } else {
+                return 3000;
+            }
+        }
+
         // return chart function from closure
         return chart;
     }
@@ -135,4 +175,4 @@ function d3Component() {
     d3.csv('data/nodes-data.csv').then(display);
 }
 
-module.exports = d3Component;
+module.exports = d3Bubbles;
