@@ -35,15 +35,6 @@ function d3Columns(rawData) {
     chart.append('g')
         .call(d3.axisLeft(yScale));
 
-    // vertical grid lines
-    // chart.append('g')
-    //   .attr('class', 'grid')
-    //   .attr('transform', `translate(0, ${height})`)
-    //   .call(makeXLines()
-    //     .tickSize(-height, 0, 0)
-    //     .tickFormat('')
-    //   )
-
     chart.append('g')
         .attr('class', 'grid')
         .call(makeYLines()
@@ -108,7 +99,7 @@ function d3Columns(rawData) {
                 .transition()
                 .duration(300)
                 .attr('opacity', 1)
-                .attr('x', (a) => xScale(a.language))
+                .attr('x', (a) => xScale(a.name))
                 .attr('width', xScale.bandwidth())
 
             chart.selectAll('#limit').remove()

@@ -63,7 +63,7 @@ function d3Bubbles(rawData) {
             // size bubbles based on area
             const radiusScale = d3.scaleSqrt()
                 .domain([0, maxSize])
-                .range([0, 80]);
+                .range([0, 200]);
 
             let foods = rawData.map(d => {
                 // debugger
@@ -126,14 +126,49 @@ function d3Bubbles(rawData) {
                         return fillColourForTotal(d.totalLevel);
                     }
                 })
+                .on('mouseover', handleMouseOver)
+                .on('mouseout', handleMouseOut);
 
+            
+            function handleMouseOver(d, i) {
+                debugger
+                d3.select(this).style("opacity", 0.6);
+
+                // svg.append("text").attr({
+                //     id: "t"+ d.x + "-" + d.y + "-" + i,
+                //     x: function () { return xScale(d.x) - 30; },
+                //     y: function () { return yScale(d.y) - 15; }
+                // })
+                // .text(function() {
+                //     debugger
+                //     return [`food: ${d.name}`, `quantity: ${d.quantity}`]
+                // })
+                svg.append("text")
+                    .attr('id', () => `t${i}`)
+                    .attr('x', () => d.x - 30)
+                    .attr('y', () => d.y - 30)
+                    .style('fill', 'grey')
+                    .text(function() {
+                    debugger
+                    return [`food: ${d.name}`, `quantity: ${d.quantity}`]
+                })
+            }
+
+            function handleMouseOut(d, i) {
+                debugger
+                d3.select(this).attr(
+                    'r', d => d.radius
+                ).style("opacity", 1.0)
+
+                d3.select(`#t${i}`).remove();
+            }
             // labels
             labels = elements
                 .append('text')
                 .attr('dy', '.3em')
                 .style('text-anchor', 'middle')
                 .style('font-size', 10)
-                .text(d => d.name)
+                .text(d => d.calories)
 
             // set simulation's nodes to our newly created nodes array
             // simulation starts running automatically once nodes are set
