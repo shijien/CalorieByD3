@@ -110,7 +110,7 @@ function d3Columns(rawData) {
         .append('text')
         .attr('class', 'value')
         .attr('x', (a) => xScale(a.name) + xScale.bandwidth() / 2)
-        .attr('y', (a) => yScale(a.calories) + 30)
+        .attr('y', (a) => yScale(a.calories) - 2)
         .attr('text-anchor', 'middle')
         .text((a) => `${a.calories}`)
 

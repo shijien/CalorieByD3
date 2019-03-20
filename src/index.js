@@ -5,6 +5,7 @@ import "./stylesheets/style.scss";
 const axios = require('axios');
 const D3Bubbles = require('./d3_bubbles');
 const D3Columns = require('./d3_columns');
+const StorageAPI = require('./utils/storage');
 
 
 
@@ -25,21 +26,21 @@ function handleSubmitFood(ingredients) {
     
 }
 
-function getStorageItem(itemName) {
-    let myStorage = window.localStorage;
-    return JSON.parse(myStorage.getItem(itemName));
-}
+// function getStorageItem(itemName) {
+//     let myStorage = window.localStorage;
+//     return JSON.parse(myStorage.getItem(itemName));
+// }
 
-function setStorageItem(itemName, items) {
-    let myStorage = window.localStorage;
-    myStorage.setItem(itemName, JSON.stringify(items));
-    return items;
-}
+// function setStorageItem(itemName, items) {
+//     let myStorage = window.localStorage;
+//     myStorage.setItem(itemName, JSON.stringify(items));
+//     return items;
+// }
 
 document.addEventListener('DOMContentLoaded', () => {
     // debugger
-    if (getStorageItem("calorieData") === null) {
-        setStorageItem("calorieData", [
+    if (StorageAPI.getStorageItem("calorieData") === null) {
+        StorageAPI.setStorageItem("calorieData", [
             {
                 name: "apple",
                 calories: 45,
@@ -57,8 +58,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         ]);
     }
-    D3Bubbles(getStorageItem("calorieData"));
-    D3Columns(getStorageItem("calorieData"));
+    D3Bubbles(StorageAPI.getStorageItem("calorieData"));
+    D3Columns(StorageAPI.getStorageItem("calorieData"));
 
     document.getElementById('search-form-container').addEventListener('submit', e => {
         e.preventDefault();
@@ -75,11 +76,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 quantity: quantity
             };
             // debugger
-            let items = getStorageItem("calorieData");
+            let items = StorageAPI.getStorageItem("calorieData");
             items.push(bubbleData);
             location.reload();
-            D3Bubbles(setStorageItem("calorieData", items));
-            D3Columns(setStorageItem("calorieData", items));
+            D3Bubbles(StorageAPI.setStorageItem("calorieData", items));
+            D3Columns(StorageAPI.setStorageItem("calorieData", items));
         });
     });
 

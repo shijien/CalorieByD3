@@ -2,3 +2,72 @@ div#info-part-container {
     display: flex;
     justify-content: space-around;
 }
+
+
+
+div#column-chart-container {
+  width: 1000px;
+  height: 600px;
+  margin: auto;
+  background-color: #2F4A6D;
+}
+
+#column-chart-container svg {
+  width: 100%;
+  height: 100%;
+}
+
+#column-chart-container .bar {
+  fill: #80cbc4;
+}
+
+#column-chart-container text {
+  font-size: 12px;
+  fill: #fff;
+}
+
+#column-chart-container path {
+  stroke: gray;
+}
+
+#column-chart-container line {
+  stroke: gray;
+}
+
+#column-chart-container line#limit {
+  stroke: #FED966;
+  stroke-width: 3;
+  stroke-dasharray: 3 6;
+}
+
+#column-chart-container .grid path {
+  stroke-width: 0;
+}
+
+#column-chart-container .grid .tick line {
+  stroke: #9FAAAE;
+  stroke-opacity: 0.3;
+}
+
+#column-chart-container text.divergence {
+  font-size: 14px;
+  fill: #2F4A6D;
+}
+
+#column-chart-container text.value {
+  font-size: 14px;
+}
+
+#column-chart-container text.title {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+#column-chart-container text.label {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+#column-chart-container text.source {
+  font-size: 10px;
+}
