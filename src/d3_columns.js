@@ -2,12 +2,28 @@
 const d3 = require("d3");
 
 function d3Columns(rawData) {
+    rawData = rawData.filter(el => el.calories !== 0);
+    let updateData = {};
+    for (let i = 0; i < rawData.length; i ++) {
+        if (!updateData[rawData[i].name]) {
+            updateData[rawData[i].name] = rawData[i];
+        } else {
+            updateData[rawData[i].name].calories += rawData[i].calories;
+        }
+    }
+    debugger
+    rawData = Object.values(updateData); 
     const svg = d3.select('#column-chart');
     const svgContainer = d3.select('#column-chart-container');
 
     const margin = 80;
     const width = 1000 - 2 * margin;
-    const height = 600 - 2 * margin;
+    const height = 1000 - 2 * margin;
+
+    const fillColour = d3
+        .scaleOrdinal()
+        .domain(["50", "200", "500", "1000"])
+        .range(["#00CC00", "#B2FF66", "#66B2FF", "#B266FF"]);
 
     const chart = svg.append('g')
         .attr('transform', `translate(${margin}, ${margin})`);
@@ -54,6 +70,11 @@ function d3Columns(rawData) {
         .attr('y', (g) => yScale(g.calories))
         .attr('height', (g) => height - yScale(g.calories))
         .attr('width', xScale.bandwidth())
+        .attr("fill", g => {
+            if (g.level !== undefined) {
+                return fillColour(g.level);
+            } 
+        })
         .on('mouseenter', function (actual, i) {
             d3.selectAll('.value')
                 .attr('opacity', 0)
@@ -77,7 +98,7 @@ function d3Columns(rawData) {
             barGroups.append('text')
                 .attr('class', 'divergence')
                 .attr('x', (a) => xScale(a.name) + xScale.bandwidth() / 2)
-                .attr('y', (a) => yScale(a.calories) + 30)
+                .attr('y', (a) => yScale(a.calories) - 2)
                 .attr('fill', 'white')
                 .attr('text-anchor', 'middle')
                 .text((a, idx) => {

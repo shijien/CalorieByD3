@@ -15,25 +15,28 @@
 </head>
 
 <body>
-    <h1 id="title">Calorie Caculator</h1>
-    <div id='vis'></div> 
+    <h1 id="title">Calorie By D3</h1>
+    <form id="search-form-container">
+        <label id="food-name">Food
+            <input class="inputFood" type="text" name="food" playholder="food" />
+        </label>
+        <label id="food-quantities">Quantities
+            <input class="inputFood" type="number" name="quantities" min="0" playholder="food" />
+        </label>
+        <label id="food-unit">Unit
+            <input class="inputFood" type="text" name="unit" value="" playholder="food" />
+        </label>
+    
+        <label>
+            <input id="submit-button" type="submit" value="Submit">
+        </label>
+    </form>
+    <div id="info-container">
+        <div id='vis'>       
+    </div> 
     <div id="column-chart-container">
         <svg id='column-chart' />
     </div>
-    <div id="search-form">
-        <form id="search-form-container">
-            <label id="food-name">Food Name
-                <input class="inputFood" type="text" name="food" playholder="food"/>
-            </label>
-            <label id="food-quantities">Quantities
-                <input class="inputFood" type="number" name="quantities" min="0" playholder="food" />
-            </label>
-            <label id="food-unit">Unit
-                <input class="inputFood" type="text" name="unit" value="" playholder="food"/>
-            </label>
-            
-            <input type="submit" value="Submit">
-        </form>
     </div>
 </body>
 

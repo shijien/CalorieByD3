@@ -1,15 +1,73 @@
-div#info-part-container {
-    display: flex;
-    justify-content: space-around;
+body {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 
+h1#title {
 
+  background: -webkit-linear-gradient(red, green);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 50px;
+}
+
+input {
+  width:auto;
+  margin-left: 15px;
+  height: 25px;
+  border-bottom: 1px solid black;
+}
+
+input:hover {
+  border: 2 outset greenyellow;
+  border-style: 
+}
+
+#search-form-container {
+  padding: 5px;
+  width: 70%;
+  display: flex;
+  justify-content: space-evenly;
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+}
+
+#search-form-container > label {
+  padding: 7px;
+  height: 30px;
+  font-size: 30px;
+  display: flex;
+  align-items: center;
+}
+
+#info-container {
+  margin: 50px 200px;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+}
+
+#title {
+  align-self: center;
+}
+
+div#info-part-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+#submit-button {
+    font-size: 20px;
+    height: 38px;
+}
 
 div#column-chart-container {
-  width: 1000px;
-  height: 600px;
+  width: 900px;
+  height: 1000px;
   margin: auto;
-  background-color: #2F4A6D;
+  background-color: white;
 }
 
 #column-chart-container svg {
@@ -17,25 +75,21 @@ div#column-chart-container {
   height: 100%;
 }
 
-#column-chart-container .bar {
-  fill: #80cbc4;
-}
-
 #column-chart-container text {
-  font-size: 12px;
-  fill: #fff;
+  font-size: 18px;
+  fill: black;
 }
 
 #column-chart-container path {
-  stroke: gray;
+  stroke: black;
 }
 
 #column-chart-container line {
-  stroke: gray;
+  stroke: black;
 }
 
 #column-chart-container line#limit {
-  stroke: #FED966;
+  stroke: black;
   stroke-width: 3;
   stroke-dasharray: 3 6;
 }
@@ -45,13 +99,13 @@ div#column-chart-container {
 }
 
 #column-chart-container .grid .tick line {
-  stroke: #9FAAAE;
+  stroke: black;
   stroke-opacity: 0.3;
 }
 
 #column-chart-container text.divergence {
   font-size: 14px;
-  fill: #2F4A6D;
+  fill: #2f4a6d;
 }
 
 #column-chart-container text.value {
