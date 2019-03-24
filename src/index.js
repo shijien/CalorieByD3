@@ -8,12 +8,6 @@ const D3Columns = require('./d3_columns');
 const StorageAPI = require('./utils/storage');
 
 
-
-// function titleComponent() {
-//     let title = document.getElementsByClassName('app-title')[0];
-//     title.innerHTML = lodash.join(["Food Calorie Calculator"]);
-// }
-
 function getCalories(ingredients) {
     const data = {
         ingredients: ingredients
@@ -25,17 +19,6 @@ function handleSubmitFood(ingredients) {
     return getCalories(ingredients);
     
 }
-
-// function getStorageItem(itemName) {
-//     let myStorage = window.localStorage;
-//     return JSON.parse(myStorage.getItem(itemName));
-// }
-
-// function setStorageItem(itemName, items) {
-//     let myStorage = window.localStorage;
-//     myStorage.setItem(itemName, JSON.stringify(items));
-//     return items;
-// }
 
 document.addEventListener('DOMContentLoaded', () => {
     // debugger
@@ -83,11 +66,6 @@ document.addEventListener('DOMContentLoaded', () => {
             D3Columns(StorageAPI.setStorageItem("calorieData", items));
         });
     });
-
-   
-
-    // window.getCalories = getCalories;
-    // getCalories("1 cup of apples").then(res => console.log(res)).catch(err => console.log(err));
 });
 
 
