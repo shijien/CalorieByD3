@@ -1,7 +1,5 @@
-const lodash = require('lodash');
 import "./stylesheets/style.scss";
-//import Icon from './images/icon.png';
-// const D3Compoent = require('')
+const lodash = require('lodash');
 const axios = require('axios');
 const D3Bubbles = require('./d3_bubbles');
 const D3Columns = require('./d3_columns');
