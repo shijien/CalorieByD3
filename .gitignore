@@ -3,7 +3,7 @@ bundle.js
 config/keys.js
 
 # production
-/build
+# /build
 
 # misc
 .DS_Store
