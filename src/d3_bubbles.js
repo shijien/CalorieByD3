@@ -85,7 +85,7 @@ function d3Bubbles(rawData) {
       // debugger
       // use max size in the data as the max in the scale's domain
       // note we have to ensure that size is a number
-      debugger;
+
       rawData = rawData.filter(el => el.calories !== 0);
       let totalCalories = 0;
 
@@ -159,6 +159,26 @@ function d3Bubbles(rawData) {
         .enter()
         .append("g");
 
+      d3.select("svg")
+        .append("text")
+        .attr("font-size", "15px")
+        .attr("class", "label")
+        .attr("x", -60)
+        .attr("y", 6 * legendRectSize)
+        .attr("transform", "rotate(-90)")
+        .attr("text-anchor", "middle")
+        .text("food calorie level");
+
+      d3.select("svg")
+        .append("text")
+        .attr("font-size", "15px")
+        .attr("class", "label")
+        .attr("x", -50)
+        .attr("y", 13 * legendRectSize)
+        .attr("transform", "rotate(-90)")
+        .attr("text-anchor", "middle")
+        .text("daily alert");
+
       const legendTotal = d3
         .select("svg")
         .append("g")
@@ -169,7 +189,7 @@ function d3Bubbles(rawData) {
         .attr("class", "legend")
         .attr("transform", function(d, i) {
           var height = legendRectSize;
-          var x = 200;
+          var x = 400;
           var y = i * height;
           return "translate(" + x + "," + y + ")";
         });
@@ -184,7 +204,7 @@ function d3Bubbles(rawData) {
         .attr("class", "legend")
         .attr("transform", function(d, i) {
           var height = legendRectSize;
-          var x = 0;
+          var x = 200;
           var y = i * height;
           return "translate(" + x + "," + y + ")";
         });
@@ -280,7 +300,6 @@ function d3Bubbles(rawData) {
         .append("text")
         .attr("dy", ".3em")
         .style("text-anchor", "middle")
-        .style("font-size", 20)
         .text(d => d.name);
 
       // set simulation's nodes to our newly created nodes array

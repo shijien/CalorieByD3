@@ -11,8 +11,13 @@ function d3Columns(rawData) {
             updateData[rawData[i].name].calories += rawData[i].calories;
         }
     }
-    debugger
-    rawData = Object.values(updateData); 
+    rawData = Object.values(updateData).sort((e1, e2)=> {
+        if (e1.calories === e2.calories) {
+            return 0;
+        } else {
+            return e1.calories < e2.calories ? -1 : 1;
+        }
+    }); 
     const svg = d3.select('#column-chart');
     const svgContainer = d3.select('#column-chart-container');
 
@@ -139,7 +144,7 @@ function d3Columns(rawData) {
         .append('text')
         .attr('class', 'label')
         .attr('x', -(height / 2) - margin)
-        .attr('y', margin / 2.4)
+        .attr('y', margin / 6)
         .attr('transform', 'rotate(-90)')
         .attr('text-anchor', 'middle')
         .text('Calories(kCal)')
@@ -154,7 +159,7 @@ function d3Columns(rawData) {
     svg.append('text')
         .attr('class', 'title')
         .attr('x', width / 2 + margin)
-        .attr('y', 40)
+        .attr('y', 18)
         .attr('text-anchor', 'middle')
         .text('Your daily calories from food')
 }

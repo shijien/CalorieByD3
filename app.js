@@ -3,6 +3,7 @@ const app = express();
 const path = require("path");
 const fetch = require("node-fetch");
 const bodyParser = require('body-parser');
+const keys = require('./config/keys');
 
 
 const PORT = process.env.PORT || 3000; // process.env accesses heroku's environment variables
@@ -19,7 +20,7 @@ app.use(bodyParser.json());
 app.post("/getcalories/", (req, res) => {
 
   fetch(
-    `https://api.edamam.com/api/nutrition-data?app_id=d3dfd896&app_key=1d6f328c3be62bc447b01e2801aeb60e&ingr=${req.body.ingredients}`
+    `https://api.edamam.com/api/nutrition-data?app_id=d3dfd896&app_key=${keys.foodApiKey}&ingr=${req.body.ingredients}`
   ).then(res => {
     return res.text();
   }).then(body => {
