@@ -4,7 +4,7 @@ const StorageAPI = require("./utils/storage");
 function d3Bubbles(rawData) {
   // debugger
   function bubbleChart() {
-    const width = 1150;
+    const width = 900;
     const height = 1000;
 
     // location to centre the bubbles
@@ -164,7 +164,7 @@ function d3Bubbles(rawData) {
         .attr("font-size", "15px")
         .attr("class", "label")
         .attr("x", -60)
-        .attr("y", 6 * legendRectSize)
+        .attr("y", 1 * legendRectSize)
         .attr("transform", "rotate(-90)")
         .attr("text-anchor", "middle")
         .text("food calorie level");
@@ -174,7 +174,7 @@ function d3Bubbles(rawData) {
         .attr("font-size", "15px")
         .attr("class", "label")
         .attr("x", -50)
-        .attr("y", 13 * legendRectSize)
+        .attr("y", 6 * legendRectSize)
         .attr("transform", "rotate(-90)")
         .attr("text-anchor", "middle")
         .text("daily alert");
@@ -189,7 +189,7 @@ function d3Bubbles(rawData) {
         .attr("class", "legend")
         .attr("transform", function(d, i) {
           var height = legendRectSize;
-          var x = 400;
+          var x = 200;
           var y = i * height;
           return "translate(" + x + "," + y + ")";
         });
@@ -204,7 +204,7 @@ function d3Bubbles(rawData) {
         .attr("class", "legend")
         .attr("transform", function(d, i) {
           var height = legendRectSize;
-          var x = 200;
+          var x = 50;
           var y = i * height;
           return "translate(" + x + "," + y + ")";
         });
