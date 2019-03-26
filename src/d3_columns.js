@@ -22,7 +22,7 @@ function d3Columns(rawData) {
     const svgContainer = d3.select('#column-chart-container');
 
     const margin = 80;
-    const width = 1000 - 2 * margin;
+    const width = 850 - 2 * margin;
     const height = 1000 - 2 * margin;
 
     const fillColour = d3

@@ -4,7 +4,7 @@ const StorageAPI = require("./utils/storage");
 function d3Bubbles(rawData) {
   // debugger
   function bubbleChart() {
-    const width = 1500;
+    const width = 1150;
     const height = 1000;
 
     // location to centre the bubbles
